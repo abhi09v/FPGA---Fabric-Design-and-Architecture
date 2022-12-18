@@ -7,8 +7,7 @@
   
   FPGA Architecture- 
   
+  <img src="Images/fpga_arch_1.png">
   
-
-
-
-
+  
+  
