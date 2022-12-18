@@ -2,12 +2,14 @@
   This repository contains all the information studied and created during the workshop. It is primarily focused on a complete FPGA flow using the maximum open-source tools 
   
   
-  
-  Day- 1 _ FPGA Basics And Vivado
-  
-  FPGA Architecture- 
-  
-  <img src="Images/fpga_arch_1.png">
-  
+
+# Day 1 - FPGA Basics and Vivado
+ ## FPGA Architecture
+   The FPGA Architecture primarily consists of :
+    - Configurable Logic Blocks(CLBs)
+    - Programmable Interconnects 
+    - I/O Cells
+    - Memory / Block RAM
+    
   
   
