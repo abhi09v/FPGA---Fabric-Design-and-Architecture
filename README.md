@@ -176,7 +176,7 @@
  ## Introduction To VIO
    Virtual Input/Output (VIO) core is a customizable core that can both monitor and drive internal FPGA signals in real time. The number and width of the input and output ports are customizable in size to interface with the FPGA design.
    <img src="Images/vio.png">
-   <img src="Images/vio2.png">
+  
    <img src="Images/vio3.png">
 
    
