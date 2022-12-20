@@ -362,18 +362,18 @@ PGA are:
 
    The design is synthesized in Vivado tool for Basys3 FPGA, along with some constraints. The below snippet show the schematic of design after synthesis and the constraints used for synthesis.
 
-   <img src="schematic3.png">
-   <img src="implementation3.png">
+   <img src="Images/schematic3.png">
+   <img src="Images/implementation3.png">
 
 ## Synthesis To Bitstream 
    During implementation, the synthesis design is traslated to a logic design file and mapped to small blocks and sub-blocks that can fit in FPGA CLBs. These blocks are then placed and routed in a optimized way.
 
-   <img src="utilization.png">
+   <img src="Images/utilization.png">
 
    The snippet below shows the timing summary for the RVMYTH implemented core.
 
-   <img src="timingsmry3.png">
-   <img src="vtr.png">
+   <img src="Images/timingsmry3.png">
+   <img src="Images/vtr.png">
 
    The snippet below shows the Device Utilization summary for the RVMYTH implemented core.
 
