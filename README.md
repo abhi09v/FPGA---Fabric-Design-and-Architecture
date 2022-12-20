@@ -388,7 +388,7 @@
   The snippets below shows the device utilization for RVMYTH core on SOFA FPGA Fabric by the tool.
    
    <img src="Images/d5_area.png">
-     <img src="Images/d5_logic_elements.png">
+    
     
 
  ### SOFA RVMYTH Post Implementation
