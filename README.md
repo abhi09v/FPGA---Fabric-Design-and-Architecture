@@ -40,7 +40,7 @@
   - [Acknowledgement](#acknowledgement)
  
 # Introduction To FPGA
-  FPGA (Field Programmable Gate Array) are intergated circuits which have a complex arrangement of configurable logic blocks (CLBs) and programmable interconnects. 
+  A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term field-programmable. The FPGA configuration is generally specified using a hardware description language (HDL), similar to that used for an application-specific integrated circuit (ASIC). 
  
  ## FPGA vs ASIC Comparison
    | FPGA                                                                         | ASIC                                           |
@@ -57,9 +57,13 @@
 # Day 1 - Exploring FPGA Basics and Vivado
  ## FPGA Architecture
    The FPGA Architecture primarily consists of :
+    
     - Configurable Logic Blocks
+    
     - Programmable Interconnects 
+    
     - I/O Cells
+    
     - Memory / Block RAM
     
    <img src="Images/fpga_arch_1.png">
@@ -70,6 +74,11 @@
    - Look-up Table (LUT) - Logic function implementation
    - Carry and Control Logic - Arithmetic Operations
    - Flip-flops and/or latches
+   
+  1)The CLB (Configurable Logic Block) has inputs, outputs, and digital logic to carry user logic.
+  2)Interconnects give the logic blocks direction so they can apply the user logic.
+  3)Switch matrix offers to switch between interconnects based on the logic.
+  4)I/O pads utilize to connect to various applications.
    
 <img src="Images/fpga_arch_2.png">
 
@@ -137,7 +146,29 @@
 
     endmodule 
    ```
+   TESTBENCH VERILOG CODE- 
+   
+    ```
+    timescale 1ns / 1ps
 
+    module test_counter();
+    reg clk, reset;
+    wire [3:0] out; //create an instance of the design
+
+    counter dut(clk, reset, out);  
+    initial begin
+    //note that these statements are sequential.. execute one after the other 
+    //$dumpfile ("count.vcd"); 
+    //$dumpvars(0,upcounter_testbench);
+	 clk=0;  //at time=0
+	reset=1;//at time=0
+	#20; //delay 20 units
+	reset=0; //after 20 units of time, reset becomes 0
+    end
+    always 
+	#5 clk=~clk;  // toggle or negate the clk input every 5 units of time
+     endmodule 
+    ```
   ### Counter Simulation and Elaboration
    The snippet below shows the behavioural simulation for the up counter.
 
@@ -145,13 +176,15 @@
 
    Elaboration binds modules to module instances, builds the model hierarchy, computes parameter values, resolves hierarchical names, establishes net connectivity, and prepares all of this for simulation.
 
-   The snippet below is the schematic of the counter design after elaboration.
+   The snippet below is the schematic of the counter design after elaboration-
 
    <img src="Images/d1_counter_div_elaborate_schematic.png">
 
    In I/O planning, the ports for modules are assigned respective FPGA pins. The snippet below shows the details about I/O planning.
 
    <img src="Images/d1_counter_div_elaborate_io_planning.png">
+   
+
 
   ### Counter Synthesis
    Synthesis is the process that converts RTL into a technologyspecific gate-level netlist, optimized for a set of pre-defined constraints.
@@ -168,15 +201,22 @@
 
   ### Counter Timing, Power and Area
    Implementation of a design also gives details like the timing summary, device utilization, power analysis, etc. The below snippets show the brief timing sumary, implementation and power analysis of the up-counter design.
-
-   <img src="Images/d1_counter_div_implementation_timing_summary.png">   
+   
+Provided Clock frequency is 100MHz
+   <img src="Images/d1_counter_div_implementation_timing_summary.png"> 
+   
+Utilization of counter LUTs, FF, I/O   
    <img src="Images/d1_counter_div_implementation_utilization.png">
+
+Power Report of the Counter
+   
    <img src="Images/d1_counter_div_implementation_power.png">
 
  ## Introduction To VIO
-   Virtual Input/Output (VIO) core is a customizable core that can both monitor and drive internal FPGA signals in real time. The number and width of the input and output ports are customizable in size to interface with the FPGA design.
+   Virtual Input/Output (VIO) core is a customizable core that can both monitor and drive internal FPGA signals in real time as Basys3 is being accessed remotely. The number and width of the input and output ports are customizable in size to interface with the FPGA design.
+   Generated VIO
    <img src="Images/vio.png">
-  
+  Counter Connection
    <img src="Images/vio3.png">
 
    
@@ -186,14 +226,16 @@
  ## Introduction To OpenFPGA
   The OpenFPGA framework is the first open-source FPGA IP generator which supports highly-customizable homogeneous FPGA architectures. OpenFPGA provides a full set of EDA support for customized FPGAs, including Verilog-to-bitstream generation and self-testing verification. OpenFPGA targets to democratizing FPGA technology and EDA techniques, with agile prototyping approaches and constantly evolving EDA tools for chip designers and researchers.
 
-  Some key features of OpenFPGA are:
+  Some key features of OpenFVPR(Versatile Place and Route)
+PGA are:
     - Use of Automation Techniques
     - Reduction of FPGA developement cycle to few days
     - Provides open source design tools 
 
    <img src="Images/openfpga_framework.png">
 
- ## VPR
+ ## VPR(Versatile Place and Route)
+
    VPR (Versatile Place and Route) is an open source academic CAD tool designed for the exploration of new FPGA architectures and CAD algorithms, at the packing, placement and routing phases of the CAD flow.
    As input, VPR takes a description of an FPGA architecture along with a technology-mapped user circuit. It then performs packing, placement, and routing to map the circuit onto the FPGA. The output of VPR includes the FPGA configuration needed to implement the circuit and statistics about the final mapped design (eg. critical path delay, area, etc). 
 
@@ -208,14 +250,14 @@
     --disp on
    ```
 
-   The basic VPR flow involves below mentioned steps:
+   The basic VPR(https://docs.verilogtorouting.org/en/latest/vpr/) flow involves below mentioned steps:
 
-   - Packing - combinines primitives into complex blocks
-   - Placment - places complex blocks within the FPGA grid
-   - Routing - determines interconnections between blocks
-   - Analysis - analyzes the implementation
+   - Packing - combinines all the primitive netlist blocks(e.g. - all the LUTs,FF,etc into vcomplex block(.net file)
+   - Placment - places complex blocks within the FPGA grid(.place)
+   - Routing - determines interconnections between blocks(.route)
+   - Analysis - analyzes the implementation(Power,Area)
 
-## VTR
+## VTR(Verilog to Routing)
    The Verilog to Routing (VTR) project provides open-source CAD tools for FPGA architecture and CAD research. The VTR design flow takes as input a Verilog description of a digital circuit, and a description of the target FPGA architecture.
 
    To invoke VTR from command-line:
@@ -231,7 +273,7 @@
 
 ## VTR Flow
 
-   The basic VTR flow perfoms:
+   The basic VTR(https://docs.verilogtorouting.org/en/latest/quickstart/) flow perfoms:
 
    - Elaboration & Synthesis (ODIN II)
    - Logic Optimization & Technology Mapping (ABC)
