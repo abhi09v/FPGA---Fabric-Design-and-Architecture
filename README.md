@@ -380,14 +380,14 @@
 
  The snippets below shows the setup and hold timing reports generated for RVMYTH core on SOFA FPGA Fabric by the tool.
    
-     <img src="Images/d4_sofa_timing_setup.png">
-     <img src="Images/d4_sofa_timing_hold.png">
+   <img src="Images/d4_sofa_timing_setup.png">
+   <img src="Images/d4_sofa_timing_hold.png">
     
  ### SOFA RVMYTH Utilization
 
   The snippets below shows the device utilization for RVMYTH core on SOFA FPGA Fabric by the tool.
    
-     <img src="Images/d5_area.png">
+   <img src="Images/d5_area.png">
      <img src="Images/d5_logic_elements.png">
     
 
