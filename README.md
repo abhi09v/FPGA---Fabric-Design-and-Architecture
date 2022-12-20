@@ -450,5 +450,5 @@ PGA are:
 
 # Acknowledgement
   - [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
-  - [Nanditha Rao](https://github.com/nandithaec) Indian Institute of Information and Technology , Banglore.
+  - [Nanditha Rao](https://github.com/nandithaec), professor, Indian Institute of Information and Technology , Banglore.
   
